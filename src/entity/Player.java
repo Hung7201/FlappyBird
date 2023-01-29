@@ -13,6 +13,14 @@ public class Player extends Entity{
 	GamePanel gp;
 	KeyHandler keyH;
 	
+	
+
+	//public BufferedImage [] bird = new BufferedImage[3]; // hình ảnh của player
+	public BufferedImage up, nor; 
+	//public int curr = 0; // 
+	public String dir; // trạng thái của player
+	
+	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;
@@ -29,8 +37,12 @@ public class Player extends Entity{
 	
 	public void getPlayerImage()  {	
 		try {
+//			bird[0] = ImageIO.read(getClass().getResourceAsStream("/player/flappy_1.png"));
+//			bird[1] = ImageIO.read(getClass().getResourceAsStream("/player/flappy_2.png"));
+//			bird[2] = ImageIO.read(getClass().getResourceAsStream("/player/flappy_3.png"));
 			up = ImageIO.read(getClass().getResourceAsStream("/player/bird_up.png"));
 			nor = ImageIO.read(getClass().getResourceAsStream("/player/bird_normal.png"));
+			
 			//down = ImageIO.read(getClass().getResourceAsStream("/player/bird_down.png"));
 		}
 		catch(IOException e) {
@@ -41,7 +53,7 @@ public class Player extends Entity{
 	
 	public void update() {
 		if(keyH.space == true) {
-			y -= speed + 6; 
+			y -= speed + 8; 
 			dir = "up";
 		}
 		else {
@@ -52,8 +64,11 @@ public class Player extends Entity{
 	
 	public void draw(Graphics g2) {
 		BufferedImage image = null;
+//		if(curr == 3) curr=1;
+//		image = bird[curr];
 		if(dir == "up") image = up;
 		else image = nor;
 		g2.drawImage(image, x, y, gp.TileSize, gp.TileSize, null);
+//		curr++;
 	}
 }
